@@ -56,6 +56,7 @@ $(function(){
           $("#eventInfo").html(event.description);
           $("#eventLink").attr('href', event.url);
           $("#eventId").html(event.id);
+          $("#eventobjid").val(event.id);
           $("#eventContent").dialog({ modal: true, title: event.title, width:350});
           });
         } //end of function

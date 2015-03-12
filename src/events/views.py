@@ -16,9 +16,12 @@ def events(request):
 	if form.is_valid():
 		print 'works'
 		id = request.POST['form_id']
-		form_contents = request.POST
-		update_event(form_contents,id)
-		form = EventForm()
+		if id:
+			form_contents = request.POST
+			update_event(form_contents,id)
+		else:
+			create_event(form)
+			# form = EventForm()
 	else:
 		print 'nope'
 
@@ -37,6 +40,12 @@ def events(request):
 	}
 	template = 'events/index.html'
 	return render(request,template,context)
+
+def create_event(form):
+	form.save()
+
+def delete_event(id):
+	pass
 
 def update_event(instance,id):
 	event = CalendarEvent.objects.get(id=id)	

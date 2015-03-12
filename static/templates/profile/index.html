@@ -4,7 +4,11 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
+        	{% if profile.image %}
           <img class="img-circle" src="/media/{{profile.image}}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          {% else %}
+          <h1>No image to display</h1>
+          {% endif %}
      
           {% include "profile/table.html"%}
     
