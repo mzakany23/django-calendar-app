@@ -1,0 +1,35 @@
+<form method='POST'> {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+    {{form.title}}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Type</label>
+    {{form.type}}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Description</label>
+    {{form.description}}
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-5">
+        <label for="exampleInputPassword1">Start</label>
+          {{form.start}}
+      </div>
+      <div class="col-md-5">
+        <label for="exampleInputPassword1">End</label>
+          {{form.end}}
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Color</label>
+    {{form.color}}
+  </div>
+  
+  {{form2.form_id}}
+  <button type="submit" class="btn btn-default">Update Event</button>
+  <button style='margin-left: 5px;' type="submit" class="btn btn-danger" id='deleteEvent'>Delete Event</button>
+</form>

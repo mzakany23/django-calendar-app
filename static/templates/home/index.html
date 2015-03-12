@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<html lang="en">
+  {% include "home/header.html"%} 
+  <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+<script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>  
+  <body>
+
+
+    {% include "home/navbar/nav.html"%}
+
+    <div class="container">
+      {% block content %}{% endblock %}
+      {% block list %}{% endblock %}
+    </div> 
+    
+    {% include "home/scripts.html"%}
+		
+	</body>
+</html>

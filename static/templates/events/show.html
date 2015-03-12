@@ -1,0 +1,29 @@
+{% extends 'home/index.html' %}
+{% block content %}
+	<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <table class="table">
+      <h1>Class Listings</h1>
+      <hr>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Class Title</th>
+          <th>Start Date</th>
+          <th>Difficulty</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+        <tr>
+          <th scope="row"></th>
+          <td>{{event.type}}</td>
+          <td>{{event.start}}</td>
+          <td style="color: {{event.color.color}}">{{event.color}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+{% endblock %}

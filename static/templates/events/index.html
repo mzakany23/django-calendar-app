@@ -1,0 +1,77 @@
+{% extends 'home/index.html' %}
+{% block content %}
+	<div style='display: none;' id='username'>{{api.name}}</div>
+	<div style='display: none;' id='key'>{{api.key}}</div>
+	
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="row">
+				<div class="checkbox">
+			    <label style='margin-right: 15px;'>
+			      <input type="checkbox" id='dailyView'> Daily View
+			    </label>
+			     <label style='margin-right: 15px;'>
+			      <input type="checkbox" id='monthlyView'> Monthly View
+			    </label>
+			    <label>
+			      <input type="checkbox" id='agendaWeek'> Weekly View
+			    </label>
+			    <button class='btn btn-default' style='margin-left: 10px;' id='createEventId'>Create Event</button>
+			  </div>
+			</div>
+			<div class="row">
+				<div id="fullCalendar"></div>
+				<div id="deleteValidation"></div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="eventContent" title="Event Details" style="display:none;">
+	    Start: <span id="startTime"></span><br>
+	    End: <span id="endTime"></span><br>
+	    Description: <span id="eventInfo"></span>
+	    <div id="eventId" style='visibility: hidden;'></div>
+	    
+	    <p style='margin-top: 10px;'><strong><a id="eventLink" href="" target="_blank">Read More</a></strong></p>
+	    <br>
+	    {% if user.is_superuser %}
+	    {% include "events/edit.html"%}
+	    {% endif %}
+	</div>
+
+	<div id="createNewEvent" style='display:none;'>
+		{% include 'events/_form.html' %}
+	</div>
+
+	<script type="text/javascript">
+		$(function(){
+			$(this).click(function(data){
+				var event = $('#eventId').show().context;
+				var id = $('#eventId').html();
+				$('#eventobjid').val(id)
+
+			});
+
+			$('#deleteEvent').click(function(e){
+				var result = confirm('Are you sure you want to delete event?')
+				console.log(result)
+				e.preventDefault();
+				$('#eventContent').dialog('close')
+			});
+
+			$('#createEventId').click(function(){
+				$('#createNewEvent').dialog({
+					width: 350,
+					position: {"my" : 'center'},
+					draggable: false,
+				});
+				$(".ui-dialog-titlebar-close")
+          .removeClass("ui-dialog-titlebar-close")
+          .addClass("fa fa-times");
+
+			});
+		});
+
+	</script>
+{% endblock %}
