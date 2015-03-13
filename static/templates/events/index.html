@@ -3,7 +3,9 @@
 	<!-- hidden div -->
 	<div style='display: none;' id='username'>{{api.name}}</div>
 	<div style='display: none;' id='key'>{{api.key}}</div>
-	
+	<div class="row" id='success'></div>
+
+
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="row">
@@ -46,21 +48,35 @@
 	<!-- hidden div -->
 	{% if user.is_superuser %}
 	<div id="createNewEvent" style='display:none;'>
-		{% include 'events/_form.html' %}
+		{% include 'events/_create_form.html' %}
 	{% endif %}
 	</div>
 
 
 	<script type="text/javascript">
-		// this function sends a post to create event and 
-		// is supposed to send with the id scraped from
-		// hidden field
-		$(function(){
 		
+		$(function(){
+			
 			$('#deleteEvent').click(function(e){
 				var result = confirm('Are you sure you want to delete event?')
-				console.log(result)
-				e.preventDefault();
+				if(result == true){
+					
+					var username = $('#username').html();
+		  		var apiKey = $('#key').html();
+		  		var id = $('#eventId').html()
+		  		var endpoint = "http://localhost:8000/api/event/list/" + id + '/'
+		  		var url = endpoint + "?username=" + username + "&api_key" + "=" + apiKey
+
+					$.ajax({
+						url: url,
+						type: 'DELETE',
+						success: function(){
+							console.log('worked')
+						}
+					});
+				}
+				
+				// e.preventDefault();
 				$('#eventContent').dialog('close')
 			});
 
