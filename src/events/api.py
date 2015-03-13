@@ -10,4 +10,5 @@ class EventResource(ModelResource):
     allowed_methods = ['get','post','delete']
     resource_name = 'event/list'
     authentication = ApiKeyAuthentication()
+    authorization = Authorization()
     

@@ -29,5 +29,5 @@ class EventForm(forms.ModelForm):
 class EventId(forms.Form):
 	form_id = forms.CharField(widget=forms.TextInput(attrs={
 		'id' : 'eventobjid',	
-		# 'style' :	 'display: none;'
+		'style' :	 'display: none;'
 	}));
