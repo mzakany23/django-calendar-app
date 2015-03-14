@@ -19,9 +19,10 @@ def events(request):
 		if id:
 			form_contents = request.POST
 			update_event(form_contents,id)
+			form = EventForm()
 		else:
 			create_event(form)
-			# form = EventForm()
+			form = EventForm()
 	else:
 		print 'nope'
 
@@ -48,19 +49,22 @@ def delete_event(id):
 	pass
 
 def update_event(instance,id):
-	event = CalendarEvent.objects.get(id=id)	
-	type = EventType.objects.get(id=instance['type'])
-	color = EventColor.objects.get(id=instance['color'])
-	start = datetime.datetime.strptime(str(instance['start']), '%m/%d/%Y')
-	end = datetime.datetime.strptime(str(instance['end']), '%m/%d/%Y')
+	try:
+		event = CalendarEvent.objects.get(id=id)	
+		type = EventType.objects.get(id=instance['type'])
+		color = EventColor.objects.get(id=instance['color'])
+		start = datetime.datetime.strptime(str(instance['start']), '%m/%d/%Y')
+		end = datetime.datetime.strptime(str(instance['end']), '%m/%d/%Y')
 
-	event.title = instance['title']
-	event.type = type
-	event.description = instance['description']
-	event.start = start
-	event.end = end
-	event.color = color
-	event.save()
+		event.title = instance['title']
+		event.type = type
+		event.description = instance['description']
+		event.start = start
+		event.end = end
+		event.color = color
+		event.save()
+	except:
+		pass
 
 @login_required
 def event_edit(request,id):
