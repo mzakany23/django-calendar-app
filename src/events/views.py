@@ -50,7 +50,9 @@ def delete_event(id):
 
 def update_event(instance,id):
 	try:
+		
 		event = CalendarEvent.objects.get(id=id)	
+
 		type = EventType.objects.get(id=instance['type'])
 		color = EventColor.objects.get(id=instance['color'])
 		start = datetime.datetime.strptime(str(instance['start']), '%m/%d/%Y')
@@ -62,6 +64,7 @@ def update_event(instance,id):
 		event.start = start
 		event.end = end
 		event.color = color
+		
 		event.save()
 	except:
 		pass
