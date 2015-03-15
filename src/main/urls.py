@@ -7,7 +7,7 @@ event_resource =  EventResource()
 
 # home
 urlpatterns = patterns('',
-    (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
+  (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
   url(r'^$', 'front.views.home', name='home'),
   url(r'^admin/', include(admin.site.urls)),
 )
@@ -19,9 +19,12 @@ urlpatterns += patterns('user_profile.views',
 
 # events
 urlpatterns += patterns('events.views',
-	url(r'^calendar/edit/(?P<id>\d+)/$', 'event_edit',name='event_edit'),
+    url(r'^events/delete/(?P<id>\d+)/$', 'delete', name='delete'),
+    url(r'^events/detail/(?P<id>\d+)/$', 'detail', name='detail'),
+    url(r'^events/search/', 'search', name='search'),
+	  url(r'^calendar/edit/(?P<id>\d+)/$', 'event_edit',name='event_edit'),
     url(r'^calendar/', 'events', name='events'),
-    url(r'^list/', 'show', name='events_show'),
+    url(r'^list/', 'list', name='events_show'),
 )
 
 # authentication

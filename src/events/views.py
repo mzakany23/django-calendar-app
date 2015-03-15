@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from models import CalendarEvent,EventType,EventColor
 from django.shortcuts import render, HttpResponseRedirect,get_object_or_404
 from django.core import serializers
@@ -6,6 +7,36 @@ from form import EventForm,EventId
 import re
 import datetime
 
+def delete(request,id):
+	try: 
+		event = CalendarEvent.objects.get(id=id)
+		event.delete()
+	except:
+		pass
+
+	return HttpResponseRedirect('/')
+
+def detail(request,id):
+	form = EventForm(request.POST or None)
+	try:
+		event = CalendarEvent.objects.get(id=id)
+	except:
+		event = ''
+
+	context = {'event' : event, 'form' : form}
+	template = 'events/detail.html'
+	return render(request,template,context)
+
+def search(request):
+	try:
+		text = request.GET.get('search_text')
+	except:
+		text = ''
+
+	events = CalendarEvent.objects.filter(title__contains=text)
+	template = 'events/ajax_search.html'
+	context = {'events' : events}
+	return render(request,template,context)
 
 @login_required
 def events(request):
@@ -39,6 +70,7 @@ def events(request):
 		'form' : form,
 		'form2' : form2
 	}
+
 	template = 'events/index.html'
 	return render(request,template,context)
 
@@ -75,9 +107,22 @@ def event_edit(request,id):
 	return render(request)
 
 @login_required
-def show(request):
+def list(request):
 	events = CalendarEvent.objects.all()
-	context = {'events' : events}
+	paginator = Paginator(events, 5)
+	page = request.GET.get('page')
+	try: 
+		event_list = paginator.page(page)
+	except PageNotAnInteger:
+		event_list = paginator.page(1)
+	except EmptyPage:
+		event_list = paginator.page(paginator.num_pages)
+	list_range = []
+
+	for i in range(paginator.num_pages):
+		list_range.append(i+1)
+
+	context = {'events' : event_list, 'list_range' : list_range}
 	template = 'events/show.html'
 	return render(request,template,context)
 
