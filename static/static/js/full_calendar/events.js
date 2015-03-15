@@ -1,5 +1,5 @@
 $(function(){
-  
+  // endpoint
   var username = $('#username').html();
   var apiKey = $('#key').html();
   var endpoint = "http://localhost:8000/api/event/list/"
@@ -8,18 +8,36 @@ $(function(){
     // -------------------------------------------
     //  event handler
     // -------------------------------------------
-     
-     $('input').click(function(){
-        
-        if (this.id == 'dailyView'){
-          getCalendar('basicDay',url)
-        } else if (this.id == 'monthlyView'){
-          getCalendar('month',url)
-        } else if (this.id == 'agendaWeek'){
-          getCalendar('basicWeek',url)
-        }
     
-      });
+    getCalendar('month', url)
+
+
+    // $("#dailyView, #monthlyView, #agendaWeek").change(function(d){
+
+    //     var daily = $('#dailyView').is(':checked')
+    //     var monthly = $('#monthlyView').is(':checked')
+    //     var agenda = $('#agendaWeek').is(':checked')
+
+    //     if(daily == true){
+    //       $('#monthlyView').prop('checked', false);
+    //       $('#agendaWeek').prop('checked', false);
+
+    //       getCalendar('basicDay',url)
+          
+    //     } else if(monthly == true){
+    //       $('#dailyView').prop('checked', false);
+    //       $('#agendaWeek').prop('checked', false);
+    //       getCalendar('month',url)
+    //     } else if(agenda){
+    //       $('#monthlyView').prop('checked', false);
+    //       $('#dailyView').prop('checked', false);
+    //       getCalendar('basicWeek',url)
+    //     } 
+        
+    //     $('#eventobjid').val(4);
+    //  })
+
+
 
     // -------------------------------------------
     // functions
@@ -35,6 +53,10 @@ $(function(){
     })); //end when
     }
 
+    function refetch(){
+      $('#fullCalendar').fullCalendar('refetchEvents')
+    }
+
     function fullCalendarType(type,events){
       $("#fullCalendar").fullCalendar({
         events: events,
@@ -44,10 +66,23 @@ $(function(){
           center: 'prev title next',
           right: ''
         },
+
         // eventColor: '#378006',
         backgroundColor: '#378006',
+        dayClick: function(date, allDay, jsEvent, view) {
+          $('#createEvent').dialog({
+          title: 'Create New Event',
+          width: 350,
+          position: {"my" : 'center'},
+          draggable: false,
+        });
+        $(".ui-dialog-titlebar-close")
+          .removeClass("ui-dialog-titlebar-close")
+          .addClass("fa fa-times");
+        },
         
         // modal popup
+        // create form
         eventRender: function(event, element){
           element.attr('href', 'javascript:void(0);');
           element.click(function() {
@@ -56,13 +91,20 @@ $(function(){
           $("#eventInfo").html(event.description);
           $("#eventLink").attr('href', event.url);
           $("#eventId").html(event.id);
-          $("#eventobjid").val(event.id);
+          $('#eventobjid').val(event.id)
+          // $("#createobjid").append("<input id='eventobjid' name='form_id' value=" + event.id + '>')
+          //  this will not work - having problems setting ids
+          
+
           $("#eventContent").dialog({ modal: true, title: event.title, width:350});
+
           });
-        } //end of function
+        } 
 
       });
     }
+
+   
 
     // -------------------------------------------
     //  end function

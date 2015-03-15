@@ -10,6 +10,9 @@
           
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
+            <li>
+              {% include 'events/_search.html' %}
+            </li>
             <li><a href="{% url 'events'%}">Calendar</a></li>
             <li><a href="{% url 'events_show'%}">Classes</a></li>
             {% include 'home/navbar/dropdown.html'%}

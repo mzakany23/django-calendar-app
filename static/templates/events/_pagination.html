@@ -1,0 +1,23 @@
+<nav>
+  <ul class="pagination">
+    {% if events.has_previous %}
+    <li>
+      <a href="?page={{ events.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">Previous</span>
+      </a>
+    {% endif %}
+    </li>
+    {% for page in list_range %}
+
+      <li><a href="?page={{ page }}">{{ page }}</a></li>
+    {% endfor %}
+    
+    {% if events.has_next %}
+    <li>
+      <a href="?page={{ events.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>

@@ -1,0 +1,32 @@
+<form class="navbar-form navbar-left" role="search" method='GET' action="{% url 'search' %}">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Event Title" id='search' name='search_text'>
+  </div>
+  <button type="submit" class="btn btn-default">Search</button>
+</form>
+
+<ul id='search-text'></ul>
+
+<script type="text/javascript">
+	$(function(){
+		$('#search').keyup(function(){
+			$.ajax({
+			type: "POST",
+			url: "/events/search/"
+			data: {
+				'search_text' : $('#search').val(),
+				'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+			},
+			success: searchSuccess,
+			dataType: 'html'
+		});
+		})
+
+		function searchSuccess(data){
+			$('#search-results').html(data)
+		}
+	});
+
+
+
+</script>

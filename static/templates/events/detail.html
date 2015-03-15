@@ -1,0 +1,40 @@
+{% extends 'home/index.html' %}
+{% block content %}
+
+<div id="createModal" style='display: none;'>
+	{% include 'events/_form.html' %}
+</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Title: {{ event.title }}</h2>
+			<p>event id: {{ event.id }}</p>
+			<p>start: {{ event.start }}</p>
+			<p>type: {{ event.type }}</p>
+			<p>description: {{ event.description }}</p>
+
+			<button class="btn btn-default" style='width: 100px;' id='createStatic'>update</button>
+			<button class="btn btn-danger" style='width: 100px;'><a href="{% url 'delete' event.id %}">Delete</a></button>
+		</div>
+	
+	
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$('#createStatic').click(function(){
+			console.log('works')
+			$('#createModal').dialog({
+				width: 350,
+				position: {"my" : 'center'},
+				draggable: false,
+			});
+		});
+	});
+
+</script>
+
+
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+{% extends 'home/index.html' %}
+
+{% block content %}
+
+{% if events.count > 0 %}
+	{% for e in events %}
+
+	<div class="row" style='border-style: solid; border-width: 1px;'>
+		<div class="col-md-6">
+			<h2>Title:<a href="{% url 'detail' e.id %}">{{ e.title }}</a><br></h2>
+			<p>start: {{ e.start }}</p>
+			<p>type: {{ e.type }}</p>
+			<p>description: {{ e.description }}</p>
+		</div>
+	</div>
+
+	{% endfor %}
+{% else %}
+	<h1>There are no search results</h1>
+{% endif %}
+<hr>
+
+<button class='btn btn-default'><a href="{% url 'home' %}">Home</a></button>
+
+
+{% endblock %}

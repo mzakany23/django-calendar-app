@@ -4,7 +4,8 @@
 	<div style='display: none;' id='username'>{{api.name}}</div>
 	<div style='display: none;' id='key'>{{api.key}}</div>
 	<div class="row" id='success'></div>
-
+	
+	<!-- <input id="eventobjid"></input> -->
 
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -22,8 +23,10 @@
 			    <button class='btn btn-default' style='margin-left: 10px;' id='createEventId'>Create Event</button>
 			  </div>
 			</div>
+
 			<div class="row">
-				<div id="fullCalendar"></div>
+				<div class="line-separator" style='height: 1px; border-bottom:1px solid #cccaca;background:#717171;'></div>
+				<div id="fullCalendar" style='margin-top: 20px;'></div>
 				<div id="deleteValidation"></div>
 			</div>
 			
@@ -31,13 +34,16 @@
 	</div>
 
 	<!-- hidden div -->
+	<div id="createEvent" style='display: none;'>{% include 'events/_create_form.html' %}</div>
+
 	<div id="eventContent" title="Event Details" style="display:none;">
 	    Start: <span id="startTime"></span><br>
 	    End: <span id="endTime"></span><br>
-	    Description: <span id="eventInfo"></span>
-	    <div id="eventId" style='visibility: hidden;'></div>
-	    <!-- <div id="eventId"></div> -->
-	    
+	    Description: <span id="eventInfo"></span><br>
+	<!-- <div id="eventId" style='visibility: hidden;'></div> -->
+	   	Event Id: <span id="eventId"></span>
+	   	<hr>
+	   	
 	    <p style='margin-top: 10px;'><strong><a id="eventLink" href="" target="_blank">Read More</a></strong></p>
 	    <br>
 	    {% if user.is_superuser %}
@@ -52,7 +58,7 @@
 	{% endif %}
 	</div>
 
-
+<!-- 
 	<script type="text/javascript">
 		
 		$(function(){
@@ -92,5 +98,5 @@
 			});
 		});
 
-	</script>
+	</script> -->
 {% endblock %}
