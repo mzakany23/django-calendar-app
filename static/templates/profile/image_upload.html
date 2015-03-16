@@ -1,0 +1,10 @@
+{% extends 'home/index.html' %}
+
+{% block content %}
+<form type='POST'>
+	{% csrf_token %}
+	{{ form }}
+	<button class="btn btn-warning" type='submit'>Submit</button>
+</form>
+	
+{% endblock %}

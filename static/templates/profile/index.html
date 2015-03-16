@@ -4,10 +4,28 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-        	{% if profile.image %}
-          <img class="img-circle" src="/media/{{profile.image}}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+
+        	{% if user.profile.image %}
+          <img class="img-circle" src="/media/{{user.profile.image}}" alt="Generic placeholder image" style="width: 140px; height: 140px; margin-bottom: 20px;">
+
+          <!-- change form -->
+          <form method="post" enctype="multipart/form-data" action="{% url 'upload' user.id %}">
+            {% csrf_token %}
+            <input type="file" name="upload_file" style='margin-bottom:10px;'>
+            <button class="btn btn-warning" type='submit'>Change <i class="fa fa-upload"></i></button>
+          </form>
+
           {% else %}
+
+          <!-- create form -->
           <h1>No image to display</h1>
+
+          <form method="post" enctype="multipart/form-data" action="{% url 'upload' user.id %}">
+            {% csrf_token %}
+            <input type="file" name="upload_file" style='margin-bottom:10px;'>
+            <button class="btn btn-warning" type='submit'>Upload <i class="fa fa-upload"></i></button>
+          </form>
+          
           {% endif %}
      
           {% include "profile/table.html"%}
