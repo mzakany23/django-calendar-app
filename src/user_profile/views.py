@@ -45,9 +45,9 @@ def image_upload(request,id):
 	except:
 			print "didn't work"
 			upload = None
-
 	if request.method == "POST":
-		if upload and validated:
+		# if upload and validated:
+		if upload:
 			try:
 				profile = Profile.objects.get(account=id)
 				user = User.objects.get(id=id)
