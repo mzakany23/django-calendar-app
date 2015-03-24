@@ -59,7 +59,11 @@ def events(request):
 
 
 	grabbed_key = re.compile(r'(?P<apiKey>\w*)')
-	api_key = grabbed_key.search(str(request.user.api_key)).group('apiKey')
+	try:
+		api_key = grabbed_key.search(str(request.user.api_key)).group('apiKey')
+	except: 
+		api_key = None
+		
 	api = {
 		'name' : request.user.username,
 		'key' : api_key
