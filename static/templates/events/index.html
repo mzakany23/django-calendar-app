@@ -7,6 +7,9 @@
 	
 	<!-- <input id="eventobjid"></input> -->
 
+	{% if api.key == None %}
+	<h1>You need an api key before you can see events</h1>
+	{% else %}
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="row">
@@ -24,6 +27,7 @@
 			  </div>
 			</div>
 
+	{% endif %}
 			<div class="row">
 				<div class="line-separator" style='height: 1px; border-bottom:1px solid #cccaca;background:#717171;'></div>
 				<div id="fullCalendar" style='margin-top: 20px;'></div>
