@@ -7,15 +7,20 @@
       </thead>
       <tbody>
         <tr>
-          
+
           <th scope="row">User</th>
           <td>{{user.username}}</td>
         </tr>
 
          <tr>
           <th scope="row">Email</th>
-          <td>{{user.email}}</td>
+          {% if user.email %}
+          <td><a href="{% url 'profile_update' %}">{{user.email}}</a></td>
+          {% else %}
+          <td><a href="{% url 'profile_update' %}">Add</a></td>
+          {% endif %}
         </tr>
+
 
       </tbody>
     </table>

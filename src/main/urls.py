@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
 # profile
 urlpatterns += patterns('user_profile.views',
+    url(r'profile/update/','profile_update', name='profile_update'),
     url(r'^profile/upload/(?P<id>\d+)/$', 'image_upload', name='upload'),
     url(r'^profile/$', 'profile', name='profile'),
 )

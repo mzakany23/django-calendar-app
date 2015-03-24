@@ -1,8 +1,10 @@
-from django.forms import ModelForm
-from models import Profile
+from django import forms
 
-class ProfilePicUpload(ModelForm):
-	class Meta:
-		model = Profile
-		fields = ['image']
-		
+class ProfileForm(forms.Form):
+	email = forms.CharField(widget=forms.EmailInput(attrs={
+		'class' : 'form-control',
+		'placeholder' : 'Email',
+		'type' : 'email'
+	}))
+
+	

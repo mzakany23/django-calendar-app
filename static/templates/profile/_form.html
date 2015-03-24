@@ -1,0 +1,44 @@
+{% extends 'home/index.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-4">
+
+  	{% if user.profile.image %}
+    <img class="img-circle" src="/media/{{user.profile.image}}" alt="Generic placeholder image" style="width: 140px; height: 140px; margin-bottom: 20px;">
+
+    <!-- change form -->
+    <form method="post" enctype="multipart/form-data" action="{% url 'upload' user.id %}">
+      {% csrf_token %}
+      <input type="file" name="upload_file" style='margin-bottom:10px;'>
+      <button class="btn btn-warning" type='submit'>Change <i class="fa fa-upload"></i></button>
+    </form>
+
+    {% else %}
+
+    <!-- create form -->
+    <h1>No image to display</h1>
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'upload' user.id %}">
+      {% csrf_token %}
+      <input type="file" name="upload_file" style='margin-bottom:10px;'>
+      <button class="btn btn-warning" type='submit'>Upload <i class="fa fa-upload"></i></button>
+    </form>
+    
+    {% endif %}
+    <h3>Update Info:</h3>
+    <br>
+    <form method='POST' action="{% url 'profile_update' %}">
+    	{% csrf_token %}
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">Email address</label>
+        {{ form.email }}
+		    <!-- <input title='example@email.com' type="email" name='emailAddress' class="form-control" id="exampleInputEmail1" placeholder="Enter email" > -->
+		  </div>
+		  <button type="submit" class="btn btn-default">Submit</button>
+		</form>
+    
+          
+    
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+   {% endblock %}
