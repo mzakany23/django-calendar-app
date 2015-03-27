@@ -7,7 +7,6 @@ event_resource =  EventResource()
 
 # home
 urlpatterns = patterns('',
-  (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
   url(r'^$', 'front.views.home', name='home'),
   url(r'^admin/', include(admin.site.urls)),
 )

@@ -1,19 +1,18 @@
-"""
-Django settings for main project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
-"""
-
-GRAPPELLI_ADMIN_TITLE = 'Calendar App'
-
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+# -----------------------------------------------------------------------------------
+# user variables
+# -----------------------------------------------------------------------------------
+
+SERVER_NAME = 'localhost:8000'
+
+
+# -----------------------------------------------------------------------------------
+# 
+# -----------------------------------------------------------------------------------
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -34,10 +33,9 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_URL = '/auth_login/'
-# Application definition
 
 INSTALLED_APPS = (
-    'grappelli',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
